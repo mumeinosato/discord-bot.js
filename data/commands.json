@@ -1,0 +1,10 @@
+[
+    {
+    "name": "ping",
+    "description": "botの応答速度を測定します"
+    },
+    {
+    "name": "help",
+    "description": "コマンド一覧を表示します"
+    }
+]
