@@ -35,7 +35,10 @@ client.on("interactionCreate", async (interaction) => {
   if (!interaction.isCommand()) {
       return;
   }
-  cmd(interaction.commandName);
+  const [type, obj] = await cmd(interaction.commandName);
+  if(type === "embed"){
+    interaction.reply({ embeds: [obj.embed] });
+  }  
 });
 
 //ボット作成時のトークンでDiscordと接続
