@@ -1,7 +1,7 @@
 [
     {
     "name": "ping",
-    "description": "botの応答速度を測定します"
+    "description": "BotのPingを表示します"
     },
     {
     "name": "help",

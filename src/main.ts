@@ -1,6 +1,8 @@
 //必要なパッケージをインポートする
-import { GatewayIntentBits, Client, Partials, Message } from 'discord.js'
+import { GatewayIntentBits, Client, Partials, Message, ActivityType  } from 'discord.js'
 import dotenv from 'dotenv'
+import {setcmd} from './register_cmd'
+import { cmd } from './commands/about'
 const fs = require('fs');
 
 //.envファイルを読み込む
@@ -18,26 +20,23 @@ const client = new Client({
   partials: [Partials.Message, Partials.Channel],
 })
 
+
 //Botがきちんと起動したか確認
 client.once('ready', async () => {
-    const cmdpath = './data/commands.json';
-    const cmdraw = fs.readFileSync(cmdpath);
-    const data = JSON.parse(cmdraw);
-    await client.application?.commands.set(data);
-    console.log('Ready!')
-    if(client.user){
-        console.log(client.user.tag)
-    }
+  await setcmd();
+  client.user?.setActivity(`テストバージョン | 導入サーバー数: ${client.guilds.cache.size} | ユーザー数: ${client.users.cache.size}`, {type: ActivityType.Playing})
+  console.log('Ready!')
+  if(client.user){
+    console.log(client.user.tag)
+  }
 })
 
-//!timeと入力すると現在時刻を返信するように
-client.on('messageCreate', async (message: Message) => {
-    if (message.author.bot) return
-    if (message.content === '!time') {
-        const date1 = new Date();
-        message.channel.send(date1.toLocaleString());
-    }
-})
+client.on("interactionCreate", async (interaction) => {
+  if (!interaction.isCommand()) {
+      return;
+  }
+  cmd(interaction.commandName);
+});
 
 //ボット作成時のトークンでDiscordと接続
 client.login(process.env.TOKEN)
