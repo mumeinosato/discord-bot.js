@@ -2,7 +2,7 @@
 import { GatewayIntentBits, Client, Partials, Message, ActivityType  } from 'discord.js'
 import dotenv from 'dotenv'
 import {setcmd} from './register_cmd'
-import { cmd } from './commands/about'
+import { cmd } from './commands/list'
 const fs = require('fs');
 
 //.envファイルを読み込む
@@ -35,7 +35,7 @@ client.on("interactionCreate", async (interaction) => {
   if (!interaction.isCommand()) {
       return;
   }
-  const [type, obj] = await cmd(interaction.commandName);
+  const [type, obj] = await cmd(interaction.commandName, client);
   if(type === "embed"){
     interaction.reply({ embeds: [obj.embed] });
   }  
