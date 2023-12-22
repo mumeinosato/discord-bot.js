@@ -1,12 +1,10 @@
 //必要なパッケージをインポートする
 import { GatewayIntentBits, Client, Partials, Message, ActivityType  } from 'discord.js'
-import dotenv from 'dotenv'
+require('dotenv').config();
 import {setcmd} from './register_cmd'
 import { cmd } from './commands/list'
+import { sendRequest } from './chatapi'
 const fs = require('fs');
-
-//.envファイルを読み込む
-dotenv.config()
 
 //Botで使うGatewayIntents、partials
 const client = new Client({
@@ -40,6 +38,18 @@ client.on("interactionCreate", async (interaction) => {
     interaction.reply({ embeds: [obj.embed] });
   }  
 });
+
+client.on('messageCreate', async (message: Message) => {
+  if (message.author.bot) return
+  const sendText = message.content;
+  try {
+    const result = await sendRequest(sendText)
+    message.reply(result)
+  }catch (error) {
+    console.error(error)
+    message.reply('エラーが発生しました')
+  }
+})
 
 //ボット作成時のトークンでDiscordと接続
 client.login(process.env.TOKEN)
