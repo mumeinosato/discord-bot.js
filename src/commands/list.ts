@@ -1,5 +1,9 @@
-export async function cmd (cmdname : string, client: any) : Promise<[string, {embed: Record<string, any> }]> {
-    if(cmdname === 'help'){
+import * as fs from 'fs'
+const chatPath = './data/chat.json';
+import { readJson, writeJson } from '../json/rwjson';
+
+export async function cmd(cmdname: string, client: any, interaction: any): Promise<[string, { embed: Record<string, any> }]> {
+    if (cmdname === 'help') {
         const tpy = "embed"
         const emobj = {
             embed: {
@@ -12,14 +16,14 @@ export async function cmd (cmdname : string, client: any) : Promise<[string, {em
                         value: "このコマンドです。"
                     },
                     {
-                        name : "about",
+                        name: "about",
                         value: "このBotについての情報を表示します。"
                     }
                 ],
             }
         };
         return [tpy, emobj]
-    }else if(cmdname === 'about'){
+    } else if (cmdname === 'about') {
         const tpy = "embed"
         const emobj = {
             embed: {
@@ -32,27 +36,60 @@ export async function cmd (cmdname : string, client: any) : Promise<[string, {em
                         value: "Mumeinosato"
                     },
                     {
-                        name : "GitHub",
+                        name: "GitHub",
                         value: "https://github.com/mumeinosato/discord-bot.js"
                     },
                     {
-                        name : "招待リンク",
-                        value : "[ここをクリック](https://discord.com/api/oauth2/authorize?client_id=729668738877620255&permissions=8&scope=bot%20applications.commands)"
+                        name: "招待リンク",
+                        value: "[ここをクリック](https://discord.com/api/oauth2/authorize?client_id=729668738877620255&permissions=8&scope=bot%20applications.commands)"
                     },
                     {
-                        name : "サーバー数",
-                        value : client.guilds.cache.size,
-                        inline : true
+                        name: "サーバー数",
+                        value: client.guilds.cache.size,
+                        inline: true
                     },
                     {
-                        name : "ユーザー数",
-                        value : client.users.cache.size,
-                        inline : true
+                        name: "ユーザー数",
+                        value: client.users.cache.size,
+                        inline: true
                     }
                 ],
             }
-        };   
-        return [tpy, emobj]             
+        };
+        return [tpy, emobj]
+    } else if (cmdname === 'chat') {
+        const chId = interaction.channelId;
+
+        const type = 'epre'
+        let reobj: { embed: Record<string, any> } = { embed: {} };
+
+        const modifyJson = (chId: string) => {
+            const jsonData = readJson();
+            const index = jsonData.indexOf(chId);
+
+            if (index !== -1) {
+                jsonData.splice(index, 1);
+                reobj = {
+                    embed: {
+                        color: 0x4169e1,
+                        description: '無効化しました'
+                    }
+                };
+            } else {
+                jsonData.push(chId);
+                reobj = {
+                    embed:
+                    {
+                        color: 0x4169e1,
+                        description: '有効化しました'
+                    }
+                };
+            }
+            writeJson(jsonData);
+        }
+
+        modifyJson(chId);
+        return [type, reobj];
     }
-    return ["embed", {embed: {color: 16757683, description: 'This is a test'}}]
+    return ["embed", { embed: { color: 16757683, description: 'This is a test' } }]
 }

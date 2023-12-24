@@ -9,6 +9,10 @@ const commands = [
     {
         name : "about",
         description: "このBotについて表示します"
+    },
+    {
+        name : 'chat',
+        description : 'AIの返信をon/offします'
     }
 ];
 
