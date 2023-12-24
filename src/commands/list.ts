@@ -1,6 +1,7 @@
 import * as fs from 'fs'
 const chatPath = './data/chat.json';
 import { readJson, writeJson } from '../json/rwjson';
+import { goroku } from '../goroku/main';
 
 export async function cmd(cmdname: string, client: any, interaction: any): Promise<[string, { embed: Record<string, any> }]> {
     if (cmdname === 'help') {
@@ -90,6 +91,41 @@ export async function cmd(cmdname: string, client: any, interaction: any): Promi
 
         modifyJson(chId);
         return [type, reobj];
+    }else if(cmdname === 'goroku'){
+        const text = interaction.options.getString('text');
+        const data = await goroku(text);
+        const type = 'embed';
+        let emobj: { embed: Record<string, any> } = { embed: {} };
+        if ((await data).found === true) {
+            const highText = data.High.join(' ');
+            const midText = data.Mid.join(' ');
+
+            emobj = {
+                embed: {
+                    color: 0x4169e1,
+                    title: '語録が見つかりました',
+                    fields: [
+                        {
+                            name: '危険',
+                            value: highText,
+                        },
+                        {
+                            name: '注意',
+                            value: midText,
+                        },
+                    ],
+                },
+            };
+        }else{
+            emobj = {
+                embed:
+                {
+                    color: 0x4169e1,
+                    description: '見つかりませんでした'
+                }
+            };
+        }
+        return [type, emobj];
     }
     return ["embed", { embed: { color: 16757683, description: 'This is a test' } }]
 }
