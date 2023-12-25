@@ -1,6 +1,8 @@
 from flask import Flask, request
 from chatterbot import languages
 from chatterbot import ChatBot
+from gensim.models.word2vec import Word2Vec
+import word
 import json
 import MeCab
 import os

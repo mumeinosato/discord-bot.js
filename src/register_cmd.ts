@@ -7,26 +7,63 @@ const commands = [
         description: "コマンド一覧を表示します",
     },
     {
-        name : "about",
+        name: "about",
         description: "このBotについて表示します",
     },
     {
-        name : 'chat',
-        description : 'AIの返信をon/offします',
+        name: 'chat',
+        description: 'AIの返信をon/offします',
     },
     {
-        name : 'goroku',
-        description : '文の中に語録があるかどうか調べます',
-        options :[{
-            name : 'text',
-            description : '調べる文',
-            type : 3,
-            required : true
+        name: 'goroku',
+        description: '文の中に語録があるかどうか調べます',
+        options: [{
+            name: 'text',
+            description: '調べる文',
+            type: 3,
+            required: true
         }],
+    },
+    {
+        name: 'word',
+        description: '単語',
+        options: [
+            {
+                name: 'math',
+                description: '計算',
+                type: 1,
+                required: false,
+                options: [
+                    {
+                    name: 'add',
+                    description: '足したい単語をカンマで区切ってください',
+                    type: 3,
+                    required: false
+                    },
+                    {
+                        name: 'subtract',
+                        description: '引きたい単語をカンマで区切ってください',
+                        type: 3,
+                        required: false
+                    }
+                ],
+            },
+            {
+                name : 'far',
+                description: '最も遠い単語を調べます',
+                type: 1,
+                options : [{
+                    name : 'word',
+                    description: '調べる単語',
+                    type: 3,
+                    required: true
+                }]
+            },
+        ],
     }
 ];
 
-const rest = new REST({version: '10'}).setToken(process.env.TOKEN);
+const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 
 export async function setcmd(): Promise<void> {
     try {

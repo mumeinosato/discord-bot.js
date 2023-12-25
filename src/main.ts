@@ -3,7 +3,7 @@ import { GatewayIntentBits, Client, Partials, Message, ActivityType  } from 'dis
 require('dotenv').config();
 import {setcmd} from './register_cmd'
 import { cmd } from './commands/list'
-import { sendRequest } from './chatapi'
+import { sendRequestChat } from './api/chatapi'
 import { checkJson } from './json/checkjson';
 const fs = require('fs');
 
@@ -53,7 +53,7 @@ client.on('messageCreate', async (message: Message) => {
   const isin = checkJson(message.channel.id);
   if (isin === true) {
     try {
-      const result = await sendRequest(sendText)
+      const result = await sendRequestChat(sendText)
       message.reply(result)
     }catch (error) {
       console.error(error)

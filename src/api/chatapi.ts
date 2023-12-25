@@ -3,7 +3,7 @@ require('dotenv').config();
 
 const apiUrl = 'http://192.168.0.12:5007/chat';
 
-export async function sendRequest(data: string): Promise<string> {
+export async function sendRequestChat(data: string): Promise<string> {
     const response = await axios.post(apiUrl, data, {
         headers: {
             'Content-Type': 'text/plain',
