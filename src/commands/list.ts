@@ -2,6 +2,7 @@ import * as fs from 'fs'
 const chatPath = './data/chat.json';
 import { readJson, writeJson } from '../json/rwjson';
 import { goroku } from '../goroku/main';
+import { sendRequest } from '../api/wordapi';
 
 export async function cmd(cmdname: string, client: any, interaction: any): Promise<[string, { embed: Record<string, any> }]> {
     if (cmdname === 'help') {
@@ -125,6 +126,55 @@ export async function cmd(cmdname: string, client: any, interaction: any): Promi
                 }
             };
         }
+        return [type, emobj];
+    }else if(cmdname === 'word'){
+        const type = 'embed';
+        let emobj: { embed: Record<string, any> } = { embed: {} };
+        const add = interaction.options.getString('add');
+        if(interaction.options.getSubcommand() == 'math'){
+            const subtract = interaction.options.getString('subtract');
+            const data = await sendRequest(add, subtract);
+            //console.log(data);
+            emobj = {
+                embed: {
+                    color: 0x4169e1,
+                    title: '計算結果',
+                    fields: [
+                        {
+                            name: '加算',
+                            value: add,
+                        },
+                        {
+                            name: '減算',
+                            value: subtract,
+                        },
+                        {
+                            name: '結果',
+                            value: data,
+                        },
+                    ],
+                },
+            };
+        }/*else if(interaction.options.getSubcommand() == 'far'){
+            const subtract = ''
+            const data = await sendRequest(add, subtract);
+            emobj = {
+                embed: {
+                    color: 0x4169e1,
+                    title: '最も遠い単語',
+                    fields: [
+                        {
+                            name: '単語',
+                            value: add,
+                        },
+                        {
+                            name: '結果',
+                            value: data,
+                        },
+                    ],
+                },
+            };
+        }*/
         return [type, emobj];
     }
     return ["embed", { embed: { color: 16757683, description: 'This is a test' } }]

@@ -48,7 +48,7 @@ const commands = [
                     }
                 ],
             },
-            {
+            /*{
                 name : 'far',
                 description: '最も遠い単語を調べます',
                 type: 1,
@@ -58,7 +58,7 @@ const commands = [
                     type: 3,
                     required: true
                 }]
-            },
+            },*/
         ],
     }
 ];

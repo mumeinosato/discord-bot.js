@@ -2,10 +2,10 @@ import axios from 'axios';
 
 const apiUrl = 'http://192.168.0.12:5008/word';
 
-async function sendRequest() {
+export async function sendRequest(arg1: string, arg2: string) {
         const response = await axios.post(apiUrl, {
-            arg1: '王,女',
-            arg2: '男',
+            arg1,
+            arg2,
         }, {
             headers: {
                 'Content-Type': 'application/json',
@@ -14,8 +14,6 @@ async function sendRequest() {
         if (response.status !== 200) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        console.log('Response:', response.data);
+        //console.log(response.data);
+        return response.data;
 }
-
-sendRequest();
-
