@@ -133,7 +133,7 @@ export async function cmd(cmdname: string, client: any, interaction: any): Promi
         const add = interaction.options.getString('add');
         if(interaction.options.getSubcommand() == 'math'){
             const subtract = interaction.options.getString('subtract');
-            const data = await sendRequest(add, subtract);
+            const data = await sendRequest(add, subtract, true);
             //console.log(data);
             emobj = {
                 embed: {
@@ -155,9 +155,9 @@ export async function cmd(cmdname: string, client: any, interaction: any): Promi
                     ],
                 },
             };
-        }/*else if(interaction.options.getSubcommand() == 'far'){
+        }else if(interaction.options.getSubcommand() == 'far'){
             const subtract = ''
-            const data = await sendRequest(add, subtract);
+            const data = await sendRequest(add, subtract,                                                                                       false);
             emobj = {
                 embed: {
                     color: 0x4169e1,
@@ -174,7 +174,7 @@ export async function cmd(cmdname: string, client: any, interaction: any): Promi
                     ],
                 },
             };
-        }*/
+        }
         return [type, emobj];
     }
     return ["embed", { embed: { color: 16757683, description: 'This is a test' } }]
