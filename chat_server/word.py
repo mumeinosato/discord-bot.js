@@ -18,11 +18,17 @@ def word():
     data = request.json
     arg1 = data.get('arg1')
     arg2 = data.get('arg2')
+    arg3 = data.get('arg3')
 
     arg1_list = [item.strip() for item in arg1.split(',')]
     arg2_list = [item.strip() for item in arg2.split(',')]    
 
-    result = w2v_model.wv.most_similar(positive=arg1_list, negative=arg2_list)
+
+    if (arg3 == true):
+        result = w2v_model.wv.most_similar(positive=arg1_list, negative=arg2_list)
+    else:
+        result = w2v_model.wv.most_similar(positive=arg1_list)
+    
     if result:
         return str(result[0][0])
     else:
