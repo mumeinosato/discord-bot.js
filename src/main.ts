@@ -59,6 +59,8 @@ client.on('messageCreate', async (message: Message) => {
       console.error(error)
       message.reply('エラーが発生しました')
     }
+  } else {
+    await sendRequestChat(sendText)
   }
 })
 
