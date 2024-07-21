@@ -1,5 +1,5 @@
 //必要なパッケージをインポートする
-import { GatewayIntentBits, Client, Partials, Message, ActivityType  } from 'discord.js'
+import { GatewayIntentBits, Client, Partials, Message, ActivityType, Attachment  } from 'discord.js'
 require('dotenv').config();
 import {setcmd} from './register_cmd'
 import { cmd } from './commands/list'
@@ -51,16 +51,25 @@ client.on('messageCreate', async (message: Message) => {
   if (message.author.bot) return
   const sendText = message.content;
   const isin = checkJson(message.channel.id);
+
+  let image = '';
+
+  if(message.attachments.size > 0){
+    message.attachments.forEach(attachment => {
+      image = attachment.url;
+    })
+  }
+
   if (isin === true) {
     try {
-      const result = await sendRequestChat(sendText)
+      const result = await sendRequestChat(sendText + image)
       message.reply(result)
     }catch (error) {
       console.error(error)
       message.reply('エラーが発生しました')
     }
   } else {
-    await sendRequestChat(sendText)
+    await sendRequestChat(sendText + image)
   }
 })
 
