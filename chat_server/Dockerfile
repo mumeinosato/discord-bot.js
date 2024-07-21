@@ -1,9 +1,9 @@
-FROM python:3.8
+FROM python:3.10
 
 RUN apt-get update && apt-get install -y
 
 RUN pip install pytz cython
-RUN pip install spacy==2.3.5
+RUN pip install spacy
 RUN pip install --upgrade pip
 RUN pip install chatterbot
 RUN pip install flask
