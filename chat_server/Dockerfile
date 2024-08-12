@@ -1,4 +1,4 @@
-FROM python:3.9
+FROM python:3.7
 
 RUN apt-get update && \
     apt-get install -y \
@@ -12,14 +12,13 @@ RUN apt-get update && \
     mecab-ipadic
 
 RUN pip install --upgrade pip
-RUN git clone  https://github.com/feignbird/ChatterBot-spacy_fixed
-RUN pip install ./ChatterBot-spacy_fixed
+RUN pip install chatterbot==1.0.4
 RUN pip install chatterbot-corpus
-RUN pip uninstall pyYAML
+RUN pip uninstall -y pyYAML
 RUN pip install pyYAML==5.3.1
+RUN pip install pytz
 RUN pip install flask
 RUN pip install mecab-python3
-
 
 WORKDIR /
 COPY . .

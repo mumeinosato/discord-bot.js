@@ -1,5 +1,5 @@
 from flask import Flask, request
-from chatterbot import languages
+##from chatterbot import languages
 from chatterbot import ChatBot
 import json
 import MeCab
@@ -41,5 +41,5 @@ def chat():
     return str(result)
 
 if __name__ == '__main__':
-    #app.run(debug=True, host='0.0.0.0' ,port=6001)
-    app.run()
+    app.run(debug=True, host='0.0.0.0' ,port=5000)
+    #app.run()
