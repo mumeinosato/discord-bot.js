@@ -69,7 +69,7 @@ export async function setcmd(): Promise<void> {
     try {
         console.log('登録中です');
         await rest.put(
-            Routes.applicationCommands(process.env.clientId),
+            Routes.applicationCommands(process.env.CLIENTID),
             { body: commands },
         );
         console.log('登録完了しました');
