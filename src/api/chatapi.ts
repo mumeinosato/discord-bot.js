@@ -1,7 +1,7 @@
 import axios from 'axios';
 require('dotenv').config();
 
-const apiUrl = 'http://chat-server/chat';
+const apiUrl = 'http://192.168.0.132:5000/chat';
 
 export async function sendRequestChat(data: string): Promise<string> {
     try {
