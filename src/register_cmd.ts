@@ -15,6 +15,14 @@ const commands = [
         description: 'AIの返信をon/offします',
     },
     {
+        name: 'join',
+        description: '読み上げを開始します',
+    },
+    {
+        name: 'bye',
+        description: '読み上げを終了します',
+    },
+    {
         name: 'goroku',
         description: '文の中に語録があるかどうか調べます',
         options: [{
