@@ -1,4 +1,4 @@
-import * as fs from 'fs'
+/*import * as fs from 'fs'
 const chatPath = './data/chat.json';
 import { readJson, writeJson } from '../json/rwjson';
 import { goroku } from '../goroku/main';
@@ -178,4 +178,4 @@ export async function cmd(cmdname: string, client: any, interaction: any): Promi
         return [type, emobj];
     }
     return ["embed", { embed: { color: 16757683, description: 'This is a test' } }]
-}
+}*/

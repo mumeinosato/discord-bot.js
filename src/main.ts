@@ -3,7 +3,7 @@ import { GatewayIntentBits, Client, Partials, Message, ActivityType, Attachment 
 import { joinVoiceChannel } from '@discordjs/voice';
 require('dotenv').config();
 import { setcmd } from './register_cmd'
-import { cmd } from './commands/list'
+import { cmd } from './cmd'
 import { sendRequestChat } from './api/chatapi'
 import { checkJson } from './json/checkjson';
 const fs = require('fs');

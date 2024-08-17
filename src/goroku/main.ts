@@ -25,7 +25,7 @@ async function fetchData(url: string): Promise<MyData[]> {
   }
 }
 
-export async function goroku(text: string): Promise<Result> {
+export async function gorokuc(text: string): Promise<Result> {
   const url = 'https://raw.githubusercontent.com/arkwnet/569/main/src/assets/list.json';
 
   try {
