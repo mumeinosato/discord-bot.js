@@ -3,9 +3,9 @@ import { about } from './commands/about';
 import { chat } from './commands/chat';
 import { goroku } from './commands/goroku';
 import { join } from './commands/voice/join';
+import { bye } from './commands/voice/bye'
 
 export async function cmd(cmdname: string, client: any, interaction: any): Promise<[string, { embed: Record<string, any> }]> {
-    console.log(cmdname);
     if (cmdname === 'help') {
         return help();
     } else if (cmdname === 'about') {
@@ -18,6 +18,8 @@ export async function cmd(cmdname: string, client: any, interaction: any): Promi
         return goroku(interaction);
     } else if (cmdname === 'join') {
         return join(interaction);
+    }else if(cmdname === 'bye'){
+        return bye(interaction)
     }
     return ["embed", { embed: { color: 16757683, description: 'This is a test' } }];
 }
