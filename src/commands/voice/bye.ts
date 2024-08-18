@@ -5,31 +5,40 @@ export async function bye(interaction: any): Promise<[string, { embed: Record<st
     let emobj: { embed: Record<string, any> } = { embed: {} };
     const type = 'embed';
 
-    if (!voiceChannel) {
-        emobj = {
-            embed: {
-                color: 0x4169e1,
-                description: 'ボイスチャンネルに接続してください'
-            }
-        };
-    } else {
-        const connection = getVoiceConnection(voiceChannel.guild.id);
-        if (connection) {
-            connection.destroy();
+    if (voiceChannel?.type === 2) {
+        if (!voiceChannel) {
             emobj = {
                 embed: {
                     color: 0x4169e1,
-                    description: 'ボイスチャンネルから退出しました'
+                    description: 'ボイスチャンネルに接続してください'
                 }
             };
         } else {
-            emobj = {
-                embed: {
-                    color: 0xff0000,
-                    description: 'ボイスチャンネルに接続されていません'
-                }
-            };
+            const connection = getVoiceConnection(voiceChannel.guild.id);
+            if (connection) {
+                connection.destroy();
+                emobj = {
+                    embed: {
+                        color: 0x4169e1,
+                        description: 'ボイスチャンネルから退出しました'
+                    }
+                };
+            } else {
+                emobj = {
+                    embed: {
+                        color: 0xff0000,
+                        description: 'ボイスチャンネルに接続されていません'
+                    }
+                };
+            }
         }
+    } else {
+        emobj = {
+            embed: {
+                color: 0x4169e1,
+                description: 'このコマンドはボイスチャンネルでのみ使用できます'
+            }
+        };
     }
 
     return [type, emobj];

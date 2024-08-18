@@ -6,7 +6,7 @@ export async function msg(message:Message) {
     if(message.author.bot) return
 
     const voiceChannel = message.member?.voice.channel
-    if(voiceChannel){
+    if(voiceChannel && message.channel.type === 2){
         await voice(message)
     }
 
