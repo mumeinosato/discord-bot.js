@@ -1,12 +1,9 @@
 //必要なパッケージをインポートする
 import { GatewayIntentBits, Client, Partials, Message, ActivityType, Attachment } from 'discord.js'
-import { joinVoiceChannel } from '@discordjs/voice';
 require('dotenv').config();
 import { setcmd } from './register_cmd'
 import { cmd } from './cmd'
 import { msg } from './msg'
-import { sendRequestChat } from './api/chatapi'
-import { checkJson } from './json/checkjson';
 const fs = require('fs');
 
 //Botで使うGatewayIntents、partials

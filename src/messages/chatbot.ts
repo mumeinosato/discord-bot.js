@@ -5,7 +5,7 @@ import { checkJson } from "../json/checkjson";
 
 export async function chatbot(message: Message) {
     const sendText = message.content
-    const isin = checkJson(message.channel.id)
+    const isin = checkJson(message.channel.id, './data/chat.json')
     let image = ''
 
     if(message.attachments.size > 0){

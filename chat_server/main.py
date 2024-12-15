@@ -2,6 +2,7 @@ from flask import Flask, request
 ##from chatterbot import languages
 from chatterbot import ChatBot
 import json
+import base64
 import MeCab
 import os
 
@@ -12,7 +13,7 @@ class MecabTagger(object):
         self.tagger = MeCab.Tagger('-Owakati')
 
     def get_text_index_string(self, text):
-        text = str(text) 
+        text = base64.b64decode(text).decode('utf-8')
         bigram_pairs = []
         document = self.tagger.parseToNode(text)
         while document:

@@ -1,6 +1,7 @@
 import { help } from './commands/help';
 import { about } from './commands/about';
 import { chat } from './commands/chat';
+import { gchat } from './commands/gchat';
 import { goroku } from './commands/goroku';
 import { join } from './commands/voice/join';
 import { bye } from './commands/voice/bye'
@@ -10,11 +11,11 @@ export async function cmd(cmdname: string, client: any, interaction: any): Promi
         return help();
     } else if (cmdname === 'about') {
         return about(client);
-    }
-    else if (cmdname === 'chat') {
+    }else if (cmdname === 'chat') {
         return chat(interaction);
-    }
-    else if (cmdname === 'goroku') {
+    } else if (cmdname === 'gchat') {
+        return gchat(interaction);
+    }else if (cmdname === 'goroku') {
         return goroku(interaction);
     } else if (cmdname === 'join') {
         return join(interaction);

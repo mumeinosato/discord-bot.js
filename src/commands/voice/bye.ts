@@ -6,7 +6,7 @@ export async function bye(interaction: any): Promise<[string, { embed: Record<st
     const type = 'embed';
 
     if (voiceChannel?.type === 2) {
-        if (!voiceChannel) {
+        if (!voiceChannel && voiceChannel?.type !== 2) {
             emobj = {
                 embed: {
                     color: 0x4169e1,

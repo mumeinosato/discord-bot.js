@@ -1,12 +1,12 @@
 import { readJson, writeJson } from '../json/rwjson';
 
-export function chat(interaction: any): [string, { embed: Record<string, any> }] {
+export async function chat(interaction: any): Promise<[string, { embed: Record<string, any> }]> {
     const chId = interaction.channelId;
     const type = 'epre';
     let reobj: { embed: Record<string, any> } = { embed: {} };
 
     const modifyJson = (chId: string) => {
-        const jsonData = readJson();
+        const jsonData = readJson('chat');
         const index = jsonData.indexOf(chId);
 
         if (index !== -1) {
@@ -27,7 +27,7 @@ export function chat(interaction: any): [string, { embed: Record<string, any> }]
                 }
             };
         }
-        writeJson(jsonData);
+        writeJson(jsonData, 'chat');
     }
 
     modifyJson(chId);
