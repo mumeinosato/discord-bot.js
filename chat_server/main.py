@@ -30,7 +30,7 @@ bot = ChatBot(
         name='AI',
         tagger=MecabTagger,
     	storage_adapter='chatterbot.storage.MongoDatabaseAdapter',
-    	database_uri='mongodb://192.168.0.34:27017/chat'
+    	database_uri='mongodb://192.168.0.117:27017/chat'
 )
 
 @app.route('/chat', methods=['POST'])
