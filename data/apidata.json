@@ -1,0 +1,7 @@
+{
+    "lastMinute": 0,
+    "lastDay": 0,
+    "perMinuteToken": 1000000,
+    "perMinuteRequest": 15,
+    "perDayRequest": 1500
+}

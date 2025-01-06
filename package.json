@@ -14,8 +14,9 @@
   "license": "ISC",
   "dependencies": {
     "@discordjs/voice": "^0.18.0",
+    "@google/generative-ai": "^0.21.0",
     "axios": "^1.7.9",
-    "discord.js": "^14.16.3",
+    "discord.js": "^14.17.2",
     "dotenv": "^16.4.7",
     "ffmpeg-static": "^5.2.0",
     "libsodium-wrappers": "^0.7.15"
